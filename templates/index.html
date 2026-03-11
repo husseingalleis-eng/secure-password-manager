@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %} Welcome to Secure Password Manager {% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+{% block content %}
+    <h1>Welcome to Secure Password Manager</h1>
+
+    {% for password in passwords %}
+        <a href="{{password['email_URL']}}" target="_blank">
+            {{ password['email_URL']}}
+        </a>
+            
+        <a href="{{ url_for('password', password_id=password['id'])}}">
+            <h3>{{password['email'] }} </h3>
+        </a>
+        <span class="badge badge-primary">{{password['created']}}</span>
+        <a href="{{ url_for('edit', id=password['id']) }}"> 
+            <span class="badge badge-warning">Edit</span>
+        </a>
+        <hr>
+    {% endfor %}
+
+{% endblock %}
+
